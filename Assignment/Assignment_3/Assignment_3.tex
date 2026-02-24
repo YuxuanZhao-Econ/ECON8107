@@ -1,0 +1,160 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amsthm,amssymb,mathtools}
+\usepackage[margin=1in]{geometry}  % already defined in main document
+\usepackage{amsmath,amsthm,amssymb,mathtools}  % already defined
+
+
+
+
+
+
+\title{Econ8107 Assignment 3}
+\author{Yuxuan Zhao}
+\date{}
+\begin{document}
+\maketitle
+
+\section*{Question 1}
+
+\subsection*{Part (a)}
+% ----------------------------
+% Pset 3, Q1(a): Lowest kink in Huggett asset supply
+% ----------------------------
+
+\paragraph{Household problem (Huggett).}
+Given the gross interest rate $R$ and an idiosyncratic income state $s\in S$
+following a Markov chain with transition $\pi(s'|s)$, the Bellman equation is
+\begin{align*}
+V(a,s)&=\max_{a'\ge -\phi}\left\{
+u\!\big(c\big)+\beta\sum_{s'}\pi(s'|s)V(a',s')
+\right\}, \quad \text{s.t.} \\
+c &= y(s)+Ra-a' \\
+a' &\ge -\phi
+\end{align*}
+Let $\mu\ge 0$ be the multiplier on the borrowing constraint $a'\ge -\phi$, we have FOC:
+\begin{align*}
+u'(c)&=\beta R \sum_{s'}\pi(s'|s)\,V_a(a',s')+\mu, \\
+\mu&\ge 0,\quad a'+\phi\ge 0,\quad \mu(a'+\phi)=0.
+\end{align*}
+Using the envelope condition $V_a(a',s')=u'(c(s'))$, we obtain the Euler inequality
+\begin{align*}
+u'(c(s)) \ \ge\ \beta R \sum_{s'}\pi(s'|s)\,u'(c(s')),\qquad \forall s\in S,
+\end{align*}
+and the borrowing constraint binds ($a'=-\phi$) if and only if
+\begin{align*}
+&u'(c(s)) \ >\ \beta R \sum_{s'}\pi(s'|s)\,u'(c(s')) \\
+\Longleftrightarrow &R<\frac{1}{\beta}\frac{u'(c(s))}{\sum_{s'}\pi(s'|s)\,u'(c(s'))}.
+\end{align*}
+
+If $a'=-\phi$, then
+\[
+c(s)=y(s)+R(-\phi)-(-\phi)=y(s)-(R-1)\phi.
+\]
+
+For aggregate saving to equal $-\phi$, all households must choose $a'=-\phi$ in every state:
+\[
+u'\!\big(y(s)-(R-1)\phi\big)\ \ge\ \beta R\sum_{s'}\pi(s'|s)\,
+u'\!\big(y(s')-(R-1)\phi\big),\qquad \forall s\in S.
+\]
+
+Equivalently, $\bar R(\phi)$ is characterized (implicitly) by the tightest state:
+\[
+\boxed{
+\bar R(\phi)=\frac{1}{\beta}\min_{s\in S}
+\frac{u'\!\big(y(s)-(\bar R(\phi)-1)\phi\big)}
+{\sum_{s'}\pi(s'|s)\,u'\!\big(y(s')-(\bar R(\phi)-1)\phi\big)}
+}
+\]
+The interest rate $\bar R(\phi)$ depends on the borrowing limit $\phi$.
+
+For $R=\bar R(\phi)$, there exists a household $s^*$ which is indifferent between borrowing $-\phi$ and saving more, and all other households strictly prefer to borrow $-\phi$. 
+
+
+
+\subsection*{Part (c)}
+
+We consider the two-state case $s\in\{s_1,s_2\}$ and write $y_i:=y(s_i)$ and $\pi_i:=\pi(s_i)$ for $i=1,2$.
+
+If the household chooses $a'=-\phi$, then:
+\[
+c_i(R)=y_i-(R-1)\phi=y_i+(1-R)\phi,\qquad i=1,2.
+\]
+
+\paragraph{Euler inequality under log utility and i.i.d.\ income.}
+Since $u'(c)=1/c$, the Euler condition with a binding borrowing constraint is
+\[
+\frac{1}{c_i(R)} \ \ge\ \beta R\sum_{j=1}^2 \pi_j \frac{1}{c_j(R)},\qquad i=1,2,
+\]
+
+Plug in $c_i(R)=y_i+(1-R)\phi$, we have
+\[
+\frac{1}{y_i+(1-R)\phi} \ \ge\ \beta R\sum_{j=1}^2 \pi_j \frac{1}{y_j+(1-R)\phi},\qquad i=1,2.
+\]
+
+The right-hand side does not depend on the current state, we only need borrowing constraint to bind for the high-income household (so they don't want to save more)
+
+Suppose $y_1<y_2$, then:
+\[
+\frac{1}{y(s_1)-(\bar R-1)\phi} >\frac{1}{y(s_2)-(\bar R-1)\phi},
+\]
+
+Then we know that $R$ need to satisfy the Euler inequality for the high-income household:
+\[
+\boxed{\frac{1}{y_2+(1-R)\phi} \ \ge\ \beta R\sum_{j=1}^2 \pi_j \frac{1}{y_j+(1-R)\phi}}.
+\]
+
+Define
+\[
+F(R)\;:=\;\frac{1}{y_2+(1-R)\phi}-\beta R\sum_{j=1}^2\pi_j\frac{1}{y_j+(1-R)\phi}.
+\]
+
+We know that there exist a finite $\bar R$ satisfying $F(\bar R)=0$.
+\footnote{
+We have $\bar R$ satisfies:
+\begin{align*}
+\bar R = \frac{1}{\beta}\min_{s\in S}
+\frac{\frac{1}{y(s)-(\bar R-1)\phi}}
+{\pi(s_1) \frac{1}{y(s_1)-(\bar R-1)\phi} + \pi(s_2) \frac{1}{y(s_2)-(\bar R-1)\phi}}
+\end{align*}
+Suppose $y_1<y_2$, then:
+\[
+\frac{1}{y(s_1)-(\bar R-1)\phi} >\frac{1}{y(s_2)-(\bar R-1)\phi},
+\]
+we only need borrowing constraint to bind for the high-income household (so they don't want to save more)
+
+Then $\bar R$ satisfies:
+\[
+\bar R = \frac{1}{\beta}\frac{\frac{1}{y(s_2)-(\bar R-1)\phi}}
+{\pi(s_1) \frac{1}{y(s_1)-(\bar R-1)\phi} + \pi(s_2) \frac{1}{y(s_2)-(\bar R-1)\phi}}.
+\]
+We can obtain a finite solution $\bar R$ to the above equation.}
+
+We want to show that for any $R\in[0,\bar R]$, we have $F(R)\ge 0$.
+\[
+F'(R)=\frac{\phi}{(y_2+\phi-\phi R)^2}
+-\beta\Big(\frac{\pi_1}{y_1+\phi-\phi R}+\frac{\pi_2}{y_2+\phi-\phi R}\Big)
+-\beta R\phi\Big(\frac{\pi_1}{(y_1+\phi-\phi R)^2}+\frac{\pi_2}{(y_2+\phi-\phi R)^2}\Big).
+\]
+
+Let $\bar R$ be the largest interest rate such that the tight-state Euler inequality holds (i.e.\ $F(R)\ge 0$):
+\[
+\bar R:=\sup\{R\ge 0:\ F(R)\ge 0\}.
+\]
+Then for any $R\in[0,\bar R]$, we have $F(R)\ge 0$, i.e.
+\[
+\frac{1}{c_2(R)}\ge \beta R\sum_{j=1}^2 \pi_j\frac{1}{c_j(R)}.
+\]
+Because $1/c_1(R)>1/c_2(R)$, the Euler inequality holds for both $i=1,2$, so the borrowing constraint binds
+for everyone and $a'(s_i)=-\phi$. Therefore aggregate saving is constant on this interval:
+\[
+A(R)=\sum_{i=1}^2 \pi_i\,a'(s_i)=\sum_{i=1}^2 \pi_i(-\phi)=-\phi,\qquad \forall\,R\in[0,\bar R].
+\]
+
+
+
+
+
+
+\end{document}
+
