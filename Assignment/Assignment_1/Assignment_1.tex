@@ -1,0 +1,306 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amsthm,amssymb,mathtools}
+\usepackage[margin=1in]{geometry}  % already defined in main document
+\usepackage{amsmath,amsthm,amssymb,mathtools}  % already defined
+
+
+
+
+
+
+\title{Econ8107 Assignment 1}
+\author{Yuxuan Zhao}
+\date{}
+\begin{document}
+\maketitle
+
+
+\section*{1. Lucas' Cost of Business Cycles}
+
+The endowment process is
+\[
+Y_t=(1+\lambda)^t(1+\varepsilon_t)Y_0,
+\]
+where $\log(1+\varepsilon_t)\sim N(\mu_\ell,\sigma^2)$ with $\mu_\ell=-\sigma^2/2$, so that
+$\mathbb E[1+\varepsilon_t]=1$. Preferences are
+\[
+U_0=\sum_{t=0}^\infty \beta^t\,\mathbb E\left[\frac{c_t^{1-\gamma}-1}{1-\gamma}\right],
+\qquad \beta(1+\lambda)^{1-\gamma}<1.
+\]
+
+\subsection*{(a) Deterministic economy ($\varepsilon_t\equiv 0$), $c_t=Y_t$}
+If $\varepsilon_t=0$ for all $t$, then $c_t=(1+\lambda)^tY_0$ and
+\begin{align*}
+U_0^{\text{det}}
+&=\sum_{t=0}^\infty \beta^t\frac{\big((1+\lambda)^tY_0\big)^{1-\gamma}-1}{1-\gamma} \\
+&=\frac{1}{1-\gamma}\left[
+Y_0^{1-\gamma}\sum_{t=0}^\infty\big(\beta(1+\lambda)^{1-\gamma}\big)^t
+-\sum_{t=0}^\infty\beta^t\right] \\
+&=\frac{1}{1-\gamma}\left[
+\frac{Y_0^{1-\gamma}}{1-\beta(1+\lambda)^{1-\gamma}}
+-\frac{1}{1-\beta}\right].
+\end{align*}
+
+\subsection*{(b) Compute $\mathbb E[(1+\varepsilon_t)^{1-\gamma}]$}
+Let $X=\log(1+\varepsilon_t)\sim N(\mu_\ell,\sigma^2)$. Then
+\[
+\mathbb E[(1+\varepsilon_t)^{1-\gamma}]
+=\mathbb E\left[e^{(1-\gamma)X}\right]
+=\exp\left((1-\gamma)\mu_\ell+\frac{(1-\gamma)^2\sigma^2}{2}\right).
+\]
+Using $\mu_\ell=-\sigma^2/2$,
+\[
+\boxed{\;\mathbb E[(1+\varepsilon_t)^{1-\gamma}]
+=\exp\left(\frac{\gamma(\gamma-1)}{2}\sigma^2\right).\;}
+\]
+
+\subsection*{(c) Stochastic economy, $c_t=(1+\mu)Y_t$}
+Now $c_t=(1+\mu)(1+\lambda)^t(1+\varepsilon_t)Y_0$, so
+\begin{align*}
+U_0^{\text{bc}}
+&=\sum_{t=0}^\infty \beta^t\,
+\frac{(1+\mu)^{1-\gamma}(1+\lambda)^{t(1-\gamma)}Y_0^{1-\gamma}\,
+\mathbb E[(1+\varepsilon_t)^{1-\gamma}] -1}{1-\gamma} \\
+&=\frac{1}{1-\gamma}\left[
+(1+\mu)^{1-\gamma}\mathbb E[(1+\varepsilon_t)^{1-\gamma}]
+\frac{Y_0^{1-\gamma}}{1-\beta(1+\lambda)^{1-\gamma}}
+-\frac{1}{1-\beta}\right].
+\end{align*}
+
+Using part (b), we have
+\[
+U_0^{\text{bc}}
+=\frac{1}{1-\gamma}\left[
+(1+\mu)^{1-\gamma}\exp\left(\frac{\gamma(\gamma-1)}{2}\sigma^2\right)
+\frac{Y_0^{1-\gamma}}{1-\beta(1+\lambda)^{1-\gamma}}
+-\frac{1}{1-\beta}\right].
+\]
+
+\subsection*{(d) Solve for $\mu$ by equating (a) and (c)}
+Set $U_0^{\text{det}}=U_0^{\text{bc}}$. Cancelling common terms implies
+\[
+(1+\mu)^{1-\gamma}\, \mathbb E[(1+\varepsilon_t)^{1-\gamma}] =1
+\quad\Rightarrow\quad
+\boxed{\;1+\mu=\Big(\mathbb E[(1+\varepsilon_t)^{1-\gamma}]\Big)^{\frac{1}{\gamma-1}}.\;}
+\]
+Using part (b),
+\[
+\boxed{\;\mu=
+\exp\left(\frac{\gamma(\gamma-1)}{2}\sigma^2\right)^{\frac{1}{\gamma-1}}-1=
+\exp\left(\frac{\gamma}{2}\sigma^2\right)-1.\;}
+\]
+
+Interpretation: $\mu$ is a \emph{consumption-equivalent} compensation: the constant proportional increase in consumption (in every date and state) that makes the agent indifferent between the stochastic economy and the deterministic one. Hence it is natural to interpret $\mu$ as the welfare \emph{cost} of business-cycle volatility.
+
+Only $\gamma$ and $\sigma$ matter here, since the effect of $\beta$, $\lambda$, and $Y_0$ is the same in both environments and cancels when we equate utilities.
+
+\subsection*{(e) Numerical value for $\gamma=2$, $\sigma=0.013$}
+With $\gamma=2$,
+\[
+\mu=\exp(\sigma^2)-1.
+\]
+Since $\sigma^2=0.013^2=0.000169$,
+\[
+\boxed{\;\mu\approx e^{0.000169}-1\approx 0.000169\approx 0.0169\%\;}
+\]
+so the implied welfare cost of U.S. business-cycle fluctuations is extremely small in this model.
+
+\subsection*{(f) Deterministic economy with growth $1+\lambda-\alpha$ and $c_t=(1+\theta)Y_t$}
+Now $Y_t=(1+\lambda-\alpha)^tY_0$ and $c_t=(1+\theta)(1+\lambda-\alpha)^tY_0$. Thus
+\[
+U_0^{\text{grow}}(\theta)
+=\sum_{t=0}^\infty \beta^t\frac{\big((1+\theta)(1+\lambda-\alpha)^tY_0\big)^{1-\gamma}-1}{1-\gamma}
+=\frac{1}{1-\gamma}\left[
+(1+\theta)^{1-\gamma}\frac{Y_0^{1-\gamma}}{1-\beta(1+\lambda-\alpha)^{1-\gamma}}
+-\frac{1}{1-\beta}\right].
+\]
+
+\subsection*{(g) Choose $\theta$ so that (f) equals (a)}
+Set $U_0^{\text{grow}}(\theta)=U_0^{\text{det}}$. Cancelling common terms implies
+\[
+(1+\theta)^{1-\gamma}\frac{1}{1-\beta(1+\lambda-\alpha)^{1-\gamma}}
+=\frac{1}{1-\beta(1+\lambda)^{1-\gamma}},
+\]
+so
+\[
+\boxed{\;\theta=\left(\frac{1-\beta(1+\lambda-\alpha)^{1-\gamma}}
+{1-\beta(1+\lambda)^{1-\gamma}}\right)^{\frac{1}{1-\gamma}}-1.\;}
+\]
+
+\subsection*{(h) Numerical value for $\beta=0.95$, $\lambda=0.03$, $\alpha=0.01$ (take $\gamma=2$)}
+For $\gamma=2$, we have $1-\gamma=-1$, hence
+\[
+1+\theta=\frac{1-\beta(1+\lambda)^{-1}}{1-\beta(1+\lambda-\alpha)^{-1}}.
+\]
+Plugging in $(1+\lambda)=1.03$ and $(1+\lambda-\alpha)=1.02$:
+\[
+1-\frac{0.95}{1.03}\approx 0.0776699,\qquad
+1-\frac{0.95}{1.02}\approx 0.0686275,
+\]
+so
+\[
+1+\theta\approx \frac{0.0776699}{0.0686275}\approx 1.1317
+\quad\Rightarrow\quad
+\boxed{\;\theta\approx 0.1317\ \text{(about }13.2\%\text{)}.\;}
+\]
+Interpretation: $\theta$ is the consumption-equivalent gain from raising the growth rate by $1\%$ (from $1+\lambda-\alpha$ back to $1+\lambda$). In this model, a permanent 1 percentage-point increase in growth is worth roughly a 13\% permanent increase in consumption.
+
+\subsection*{(i) Compare $\theta$ and $\mu$}
+We found $\mu\approx 0.0169\%$ while $\theta\approx 13.2\%$. Hence, in this framework,
+the welfare benefit of increasing long-run growth by 1 percentage point is orders of magnitude larger than the welfare benefit of eliminating business-cycle volatility.
+
+
+\section*{2. Risk Sharing with No Assets}
+
+There are two countries, two goods ($A$ and $B$), one period, and a finite set of states $s\in S$ with probabilities $\pi(s)$. Endowments are state dependent:
+\[
+(e_{1A}(s),e_{1B}(s))=(e_A(s),0),\qquad (e_{2A}(s),e_{2B}(s))=(0,e_B(s)).
+\]
+Preferences (common across countries) are
+\[
+u(c_A,c_B)=\frac{(c_Ac_B)^{\frac{1-\rho}{2}}}{1-\rho},\qquad \rho>0.
+\]
+
+\subsection*{(a) Pareto-optimal allocations (planner's problem)}
+Fix a Pareto weight $\omega\in(0,1)$. A planner chooses state-contingent allocations
+\[
+\{c_{1A}(s),c_{1B}(s),c_{2A}(s),c_{2B}(s)\}_{s\in S}
+\]
+to solve
+\begin{align*}
+\max \ & \sum_{s\in S}\pi(s)\Big[\omega\,u(c_{1A}(s),c_{1B}(s))+(1-\omega)\,u(c_{2A}(s),c_{2B}(s))\Big] \\
+\text{s.t. } \ & c_{1A}(s)+c_{2A}(s)=e_A(s),\qquad c_{1B}(s)+c_{2B}(s)=e_B(s),\quad \forall s.
+\end{align*}
+
+
+Lagrangian for state $s$:
+\[
+\mathcal L(s)=\omega u(c_{1A},c_{1B})+(1-\omega)u(c_{2A},c_{2B})
++\mu_A\big(e_A-c_{1A}-c_{2A}\big)+\mu_B\big(e_B-c_{1B}-c_{2B}\big).
+\]
+FOCs:
+\begin{align*}
+\omega\,u_{A}(c_{1A},c_{1B})&=\mu_A, & \omega\,u_{B}(c_{1A},c_{1B})&=\mu_B,\\
+(1-\omega)\,u_{A}(c_{2A},c_{2B})&=\mu_A, & (1-\omega)\,u_{B}(c_{2A},c_{2B})&=\mu_B.
+\end{align*}
+Therefore,
+\[
+\frac{u_A(c_{1A},c_{1B})}{u_A(c_{2A},c_{2B})}=\frac{1-\omega}{\omega},
+\qquad
+\frac{u_B(c_{1A},c_{1B})}{u_B(c_{2A},c_{2B})}=\frac{1-\omega}{\omega}.
+\]
+
+With $u(c_A,c_B)=\frac{(c_Ac_B)^{\frac{1-\rho}{2}}}{1-\rho}$, we have
+\[
+u_A(c_A,c_B)=\frac{1}{2}(c_Ac_B)^{\frac{-\rho-1}{2}}c_B,\qquad
+u_B(c_A,c_B)=\frac{1}{2}(c_Ac_B)^{\frac{-\rho-1}{2}}c_A.
+\]
+Align with the FOC ratios, we have:
+
+\[
+\frac{u_A(c_{1A},c_{1B})}{u_A(c_{2A},c_{2B})} = \frac{u_B(c_{1A},c_{1B})}{u_B(c_{2A},c_{2B})} = \frac{1-\omega}{\omega} \\
+\quad \Longleftrightarrow \quad
+\frac{c_{1B}(s)}{c_{2B}(s)}=\frac{c_{1A}(s)}{c_{2A}(s)} = (\frac{\omega}{1-\omega})^{1/\rho}
+\]
+
+Let $\kappa = (\frac{\omega}{1-\omega})^{1/\rho} >0$. Combining $\frac{c_{1A}(s)}{c_{2A}(s)}=\kappa$ with $c_{1A}(s)+c_{2A}(s)=e_A(s)$ gives
+\[
+c_{1A}(s)=\frac{\kappa}{1+\kappa}\,e_A(s),\qquad c_{2A}(s)=\frac{1}{1+\kappa}\,e_A(s).
+\]
+Similarly,
+\[
+c_{1B}(s)=\frac{\kappa}{1+\kappa}\,e_B(s),\qquad c_{2B}(s)=\frac{1}{1+\kappa}\,e_B(s).
+\]
+Thus, Pareto optimality implies \emph{full risk sharing}: in every state, both countries consume fixed fractions of each good, with shares pinned down by $\omega$.
+
+\subsection*{(b) Competitive equilibrium without asset markets is ex-ante Pareto efficient}
+Assume that after the state $s$ is realized, countries can trade goods in spot markets, but there are no financial assets. 
+
+Because utility function satisfies the Inada conditions, we can assume interior solutions: $(p_A(s),p_B(s))\gg 0$.
+
+\paragraph{Household problem (country $i$ in state $s$).}
+Country $i$ chooses $(c_{iA}(s),c_{iB}(s))$ to maximize
+\begin{align*}
+\max_{c_{iA},c_{iB}\ge 0}\ u(c_{iA},c_{iB}) \\
+\quad \text{s.t.}\quad
+p_A(s)c_{iA}(s)+p_B(s)c_{iB}(s)\le I_i(s),
+\end{align*}
+where incomes are
+\[
+I_1(s)=p_A(s)e_A(s),\qquad I_2(s)=p_B(s)e_B(s).
+\]
+
+\paragraph{FOC: MRS equals the price ratio.}
+At an interior solution,
+\[
+\frac{u_A(c_{iA},c_{iB})}{u_B(c_{iA},c_{iB})}=\frac{p_A}{p_B}.
+\]
+Using the marginal utilities computed above,
+\[
+\frac{u_A}{u_B}=\frac{c_{iB}}{c_{iA}} \quad \Longrightarrow \quad
+\boxed{\ \frac{c_{iB}(s)}{c_{iA}(s)}=\frac{p_A(s)}{p_B(s)}\ }\qquad(\text{for each }i,s).
+\]
+Hence $c_{iB}(s)=\frac{p_A(s)}{p_B(s)}c_{iA}(s)$. Substitute into the budget constraint:
+\[
+p_A c_{iA}+p_B c_{iB}=p_A c_{iA}+p_B\frac{p_A}{p_B}c_{iA}=2p_A c_{iA}=I_i.
+\]
+Therefore the (Marshallian) demands are
+\[
+\boxed{\ c_{iA}(s)=\frac{I_i(s)}{2p_A(s)},\qquad c_{iB}(s)=\frac{I_i(s)}{2p_B(s)}\ }.
+\]
+
+\paragraph{Market clearing and equilibrium allocation.}
+Using incomes $I_1=p_Ae_A$ and $I_2=p_Be_B$,
+\[
+c_{1A}(s)=\frac{p_Ae_A}{2p_A}=\frac{e_A(s)}{2},\qquad
+c_{2B}(s)=\frac{p_Be_B}{2p_B}=\frac{e_B(s)}{2}.
+\]
+Now impose good-$A$ market clearing:
+\[
+c_{1A}(s)+c_{2A}(s)=e_A(s).
+\]
+But $c_{2A}(s)=\frac{I_2}{2p_A}=\frac{p_Be_B}{2p_A}$, so
+\[
+\frac{e_A}{2}+\frac{p_Be_B}{2p_A}=e_A
+\quad\Longrightarrow\quad
+\boxed{\ \frac{p_A(s)}{p_B(s)}=\frac{e_B(s)}{e_A(s)}\ }.
+\]
+Then country 1's demand for $B$ is
+\[
+c_{1B}(s)=\frac{I_1}{2p_B}=\frac{p_Ae_A}{2p_B}=\frac{e_B(s)}{2},
+\]
+and country 2's demand for $A$ is
+\[
+c_{2A}(s)=\frac{I_2}{2p_A}=\frac{p_Be_B}{2p_A}=\frac{e_A(s)}{2}.
+\]
+Thus the competitive equilibrium allocation satisfies, for every state $s$,
+\[
+\boxed{\ (c_{1A}(s),c_{1B}(s))=\left(\frac{e_A(s)}{2},\frac{e_B(s)}{2}\right),\qquad
+(c_{2A}(s),c_{2B}(s))=\left(\frac{e_A(s)}{2},\frac{e_B(s)}{2}\right). }
+\]
+This allocation is Pareto optimal state by state. Since we don't have financial asset trade, thus, two countries cannot transfer resources across states.
+
+Thus, as long as we can't do pareto improvement in each state, we can't do pareto improvement ex-ante. Therefore, we have ex-ante Pareto efficiency.
+
+\subsection*{(c) Terms of trade and risk sharing}
+The equilibrium relative price is
+\[
+\frac{p_A(s)}{p_B(s)}=\frac{e_B(s)}{e_A(s)}.
+\]
+If $\frac{e_A(s)}{e_B(s)}$ is low (good $A$ is relatively scarce), then $\frac{p_A(s)}{p_B(s)}$ is high: good $A$ becomes relatively expensive.
+
+Risk sharing arises through these state-contingent terms of trade. Country 1's income in state $s$ is
+\[
+I_1(s)=p_A(s)e_A(s),
+\]
+so when $e_A(s)$ is low, $p_A(s)$ rises and partially offsets the endowment shortfall by improving country 1's purchasing power in units of good $B$. Symmetrically, when $e_A(s)$ is high, $p_A(s)$ falls. Hence relative price movements smooth consumption across states even without any asset trade.
+
+\subsection*{(d) Why the result matters}
+The analysis shows that incomplete \emph{asset} markets do not necessarily imply poor international risk sharing. With flexible spot trade in goods and state-contingent relative prices, the competitive equilibrium can achieve efficient (here, full) risk sharing. Therefore, empirical failures of international risk sharing point to additional frictions beyond missing assets, such as trade costs, non-tradables, price rigidities, home bias, or other market imperfections.
+
+
+
+
+\end{document}
+

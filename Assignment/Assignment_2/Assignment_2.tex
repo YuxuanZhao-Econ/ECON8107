@@ -1,0 +1,824 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amsthm,amssymb,mathtools}
+\usepackage[margin=1in]{geometry}  % already defined in main document
+\usepackage{amsmath,amsthm,amssymb,mathtools}  % already defined
+
+
+
+
+
+
+\title{Econ8107 Assignment 2}
+\author{Yuxuan Zhao}
+\date{}
+\begin{document}
+\maketitle
+
+\section*{1. Continuing with the CARA Example}
+
+\subsection*{(a)}
+Using the CARA closed-form consumption rule
+\[
+c(x)=\frac{R-1}{R}\,x+\frac{\bar y}{R}-\frac{\gamma (R-1)\sigma^{2}}{2R^{2}}-\frac{\log(\beta R)}{\gamma (R-1)}
+\]
+
+we have
+\[
+c(x',s')-c(x,s)=c(x')-c(x)=\frac{R-1}{R}(x'-x).
+\]
+With the cash-in-hands law of motion
+\[
+x' = x + (y(s')-\bar y) + \underbrace{\frac{\gamma(R-1)\sigma^2}{2R}+\frac{R\log(\beta R)}{\gamma(R-1)}}_{\text{drift}},
+\]
+it follows that
+\[
+c(x',s')-c(x,s)=\frac{R-1}{R}\big(y(s')-\bar y\big)
++\frac{\gamma (R-1)^2}{2R^2}\sigma^2
++\frac{1}{\gamma}\log(\beta R).
+\]
+
+
+
+\subsection*{(b)}
+
+From part (a), the change in consumption can be written as
+\[
+c(x',s')-c(x,s)=\frac{R-1}{R}\big(y(s')-\bar y\big)
++\frac{\gamma (R-1)^2}{2R^2}\sigma^2
++\frac{1}{\gamma}\log(\beta R).
+\]
+consumption follows a random walk with drift.
+
+Hall (1978) predicts that in complete market, consumption is approximately a random walk with zero drift 
+\[
+c_{t+1}=c_t+\text{innovation}.
+\]
+Here we generally have a nonzero drift: when \(\beta R \geq 1\), drift is positive.
+
+In our model, predictable income changes do not affect consumption change in this model: only unexpected income shock \(y_{t+1}-\bar y\) moves \(\Delta c_{t+1}\), with loading
+\[
+\Delta c_{t+1}=\frac{R-1}{R}(y_{t+1}-\bar y)+\text{drift}.
+\]
+
+\subsection*{(c)}
+
+We assume this is a representative agent model in general equilibrium, and we assume that in GE model, the interest rate $R$ is constant and is determined by asset market clearing:
+\[
+a^{\text{supply}}_t = A(R),
+\]
+where $a^{\text{supply}}_t$ come from individuals and $A(R)$ is the net supply of the risk-free asset, which only depends only on $R$. Market clearing requires that for all $t$,
+
+Since $R$ is constant in a stationary equilibrium, $A(R)$ is time-invariant, hence
+\[
+\mathbb{E}[a_{t+1}-a_t]=A(R)-A(R)=0.
+\]
+With CARA, the optimal consumption rule is linear, $c(x)=\frac{R-1}{R}x+\kappa$, so
+\[
+a_t=x_t-c(x_t)=\frac{1}{R}x_t-\kappa,
+\qquad\Rightarrow\qquad
+\mathbb{E}[a_{t+1}-a_t]=\frac{1}{R}\mathbb{E}[x_{t+1}-x_t].
+\]
+Therefore $\mathbb{E}[x_{t+1}-x_t]=0$. Since $\Delta c_{t+1}=\frac{R-1}{R}(x_{t+1}-x_t)$, we have
+\[
+\mathbb{E}[\Delta c_{t+1}]=\frac{R-1}{R}\mathbb{E}[x_{t+1}-x_t]=0,
+\]
+so consumption is a random walk without drift in general equilibrium.
+
+
+\subsection*{(d)}
+
+Let income be
+\begin{align*}
+y_{t+1}=w_{t+1}+\eta_{t+1},&\quad w_{t+1}=\phi w_t+(1-\phi)\bar w+\epsilon_{t+1}, \\
+\eta_{t+1}\sim N(0,\sigma_\eta^2), &\quad \epsilon_{t+1}\sim N(0,\sigma_\epsilon^2).
+\end{align*}
+To capture the law of motion of $y$, we need an extra state variable: $w$. 
+
+The Bellman equation is
+\begin{align*}
+v(x,w)&=\max_a\left\{u(x-a)+\beta\,\mathbb E\big[v(x',\,w')\mid w\big]\right\}, \quad \text{s.t.} \\
+x' &= Ra+w'+\eta' \\
+w' &=\phi w+(1-\phi)\bar w+\epsilon'
+\end{align*}
+
+\paragraph{Guess.}
+Guess exponential-affine value and linear consumption:
+\[
+v(x,w)=-\frac1\gamma \exp\!\big(-\hat A x-\hat D w-\hat B\big),\qquad
+c(x,w)=Ax+Dw+B,
+\]
+so
+\[
+a(x,w)=x-c(x,w)=(1-A)x-Dw-B.
+\]
+
+\paragraph{Envelope.}
+Envelope implies $v_x(x,w)=u'(c(x,w))$. \footnote{Let $a^*(x,w)$ be the optimal choice and define $c(x,w)=x-a^*(x,w)$. Then
+\[
+v(x,w)=u\big(x-a^*(x,w)\big)+\beta\,\mathbb E\Big[v\big(Ra^*(x,w)+w'+\eta',\,w'\big)\mid w\Big].
+\]
+Differentiate both sides with respect to $x$:
+\[
+\begin{aligned}
+v_x(x,w)
+&=u'(c)\,(1-a_x^*)+\beta\,\mathbb E\!\left[v_x(x',w')\cdot \frac{\partial x'}{\partial x}\mid w\right]
+      +\beta\,\mathbb E\!\left[v_w(x',w')\cdot \frac{\partial w'}{\partial x}\mid w\right] \\
+&=u'(c)\,(1-a_x^*)+\beta\,\mathbb E\!\left[v_x(x',w')\cdot R a_x^*\mid w\right],
+\end{aligned}
+\]
+where we used $\frac{\partial w'}{\partial x}=0$ and $\frac{\partial x'}{\partial x}=R a_x^*$. The FOC for $a$ is
+\[
+-u'(c)+\beta R\,\mathbb E\!\left[v_x(x',w')\mid w\right]=0
+\quad\Longleftrightarrow\quad
+u'(c)=\beta R\,\mathbb E\!\left[v_x(x',w')\mid w\right].
+\]
+Substituting into the expression for $v_x$ gives
+\[
+v_x(x,w)=u'(c)\,(1-a_x^*)+a_x^*\cdot u'(c)=u'(c),
+\]
+so the envelope condition is
+\[
+\boxed{\,v_x(x,w)=u'\big(c(x,w)\big)\, }.
+\]}
+
+Since $u'(c)=e^{-\gamma c}$, we have
+\[
+u'(c(x,w))=e^{-\gamma (Ax+Dw+B)}=\exp(-\gamma A x-\gamma D w-\gamma B).
+\]
+and we have
+\[
+v_x(x,w)=\frac{\hat A}{\gamma}\exp(-\hat A x-\hat D w-\hat B),
+\]
+matching coefficients for all $(x,w)$, take log on both sides, we have:
+\[
+\log (\frac{\hat A}{\gamma}) - \hat A x-\hat D w-\hat B=-\gamma A x-\gamma D w-\gamma B,
+\]
+which implies
+\[
+\hat A=\gamma A,\qquad \hat D=\gamma D, \qquad \hat B=\gamma B-\log(\frac{\hat A}{\gamma})=\gamma B-\log A,
+\]
+
+
+\paragraph{Euler equation.}
+The Euler equation is
+\[
+u'(c(x,w))=\beta R\,\mathbb E[u'(c(x',w'))].
+\]
+We know LHS is:
+\[
+u'(c(x,w))=e^{-\gamma (Ax+Dw+B)}.
+\]
+The RHS is
+\begin{align*}
+\beta R\,\mathbb E[u'(c(x',w'))]
+&=\beta R\,\mathbb E\left[e^{-\gamma (Ax'+Dw'+B)}\right] \\
+&= \beta R\, e^{-\gamma B}\,\mathbb E\left[e^{-\gamma (Ax'+Dw')}\right].
+\end{align*}
+
+We can prove that $Ax'+Dw' \mid (x,w)$ follows $\mathcal N(\mu(x,w),\Sigma)$, where:
+\begin{align*}
+\mu(x,w)&= AR(1-A)x + \Big(A(\phi-RD)+D\phi\Big)w
++ (A+D)(1-\phi)\bar w - ARB, \\
+\Sigma &= (A+D)^2\sigma_\epsilon^2 + A^2\sigma_\eta^2.
+\end{align*}
+
+\footnote{
+We know the law of motion is
+\[
+x' = Ra + w' + \eta', \qquad 
+w'=\phi w+(1-\phi)\bar w+\epsilon',
+\]
+and under the conjectured policy $c(x,w)=Ax+Dw+B$ we have
+\[
+a=x-c=(1-A)x-Dw-B.
+\]
+Substitute $a$ into $x'$:
+\[
+x' = R(1-A)x - RDw - RB + w' + \eta'.
+\]
+Therefore
+\begin{align*}
+Ax' + Dw'
+&= A\Big(R(1-A)x - RDw - RB + w' + \eta'\Big) + Dw' \\
+&= AR(1-A)x + A(\phi-RD)w - ARB + (A+D)w' + A\eta' \\
+&= AR(1-A)x + \Big(A(\phi-RD)+D\phi\Big)w 
++ \underbrace{(A+D)(1-\phi)\bar w - ARB}_{\text{constant}} \\
+&\quad + (A+D)\epsilon' + A\eta'.
+\end{align*}
+Since $\epsilon'\sim N(0,\sigma_\epsilon^2)$ and $\eta'\sim N(0,\sigma_\eta^2)$ are independent,
+conditional on $(x,w)$ we have
+\[
+Ax'+Dw' \mid (x,w) \sim \mathcal N\!\big(\mu(x,w),\,\Sigma\big),
+\]
+where
+\[
+\mu(x,w)= AR(1-A)x + \Big(A(\phi-RD)+D\phi\Big)w 
++ (A+D)(1-\phi)\bar w - ARB,
+\]
+and
+\[
+\Sigma = (A+D)^2\sigma_\epsilon^2 + A^2\sigma_\eta^2.
+\]
+}
+
+Hence, we have
+\[
+\mathbb E\!\left[e^{-\gamma(Ax'+Dw')}\mid x,w\right]
+= \exp\!\left(-\gamma\mu(x,w)+\frac{\gamma^2}{2}\Sigma\right).
+\]
+Plugging back into the RHS,
+\begin{align*}
+\beta R\,\mathbb E[u'(c(x',w'))\mid x,w]
+&= \beta R\, e^{-\gamma B}\,
+\mathbb E\!\left[e^{-\gamma(Ax'+Dw')}\mid x,w\right] \\
+&= \beta R\,\exp\!\left(
+-\gamma B-\gamma\mu(x,w)+\frac{\gamma^2}{2}\Sigma
+\right).
+\end{align*}
+
+Equating LHS and RHS and taking logs yields
+\[
+-\gamma(Ax+Dw+B)
+= \log(\beta R)-\gamma B-\gamma\mu(x,w)+\frac{\gamma^2}{2}\Sigma.
+\]
+Cancel $-\gamma B$ on both sides and substitute $\mu(x,w)$:
+\begin{align*}
+-\gamma Ax-\gamma Dw
+&= \log(\beta R)
+-\gamma\Big[AR(1-A)x + \big(A(\phi-RD)+D\phi\big)w \\
+&\qquad\qquad\quad + (A+D)(1-\phi)\bar w - ARB\Big]
++\frac{\gamma^2}{2}\Big((A+D)^2\sigma_\epsilon^2+A^2\sigma_\eta^2\Big).
+\end{align*}
+
+Since this identity must hold for all $(x,w)$, we match coefficients on $x$ and $w$ and the constant term:
+
+\emph{Coefficient on $x$:}
+\[
+A = AR(1-A)
+\quad\Longleftrightarrow\quad
+1 = R(1-A)
+\quad\Longleftrightarrow\quad
+A=\frac{R-1}{R}.
+\]
+
+\emph{Coefficient on $w$:}
+\[
+D = A(\phi-RD)+D\phi
+\quad\Longleftrightarrow\quad
+D(R-\phi)=\phi A
+\quad\Longleftrightarrow\quad
+D=\frac{\phi A}{R-\phi}.
+\]
+
+\emph{Constant term:}
+\[
+0=\log(\beta R)-\gamma\Big((A+D)(1-\phi)\bar w-ARB\Big)
++\frac{\gamma^2}{2}\Big((A+D)^2\sigma_\epsilon^2+A^2\sigma_\eta^2\Big),
+\]
+which determines $B$:
+\[
+B=\frac{(A+D)(1-\phi)\bar w}{AR}
+-\frac{1}{\gamma AR}\log(\beta R)
+-\frac{\gamma}{2AR}\Big((A+D)^2\sigma_\epsilon^2+A^2\sigma_\eta^2\Big).
+\]
+(One may further simplify this expression by substituting $A=\frac{R-1}{R}$ and $D=\frac{\phi A}{R-\phi}$.)
+
+
+From the coefficient-matching conditions, we obtain
+\[
+A=\frac{R-1}{R},
+\qquad
+D=\frac{\phi A}{R-\phi}=\frac{\phi(R-1)}{R(R-\phi)}.
+\]
+From the envelope restrictions,
+\[
+\hat A=\gamma A=\gamma\frac{R-1}{R},
+\qquad
+\hat D=\gamma D=\gamma\frac{\phi(R-1)}{R(R-\phi)}.
+\]
+
+Therefore the consumption policy is
+\[
+\boxed{
+c(x,w)=Ax+Dw+B
+=\frac{R-1}{R}\,x+\frac{\phi(R-1)}{R(R-\phi)}\,w+B.
+}
+\]
+
+The law of motion for cash-in-hands is
+\[
+\boxed{
+x' = R(1-A)x - RDw - RB + w' + \eta'
+= x+\frac{\phi(1-\phi)}{R-\phi}\,w+(1-\phi)\bar w-RB+\epsilon'+\eta'.
+}
+\]
+
+
+
+
+\subsection*{(e)}
+
+Using the policy $c(x,w)=Ax+Dw+B$, we have
+\[
+c(x',w') - c(x,w)
+= A(x'-x)+D(w'-w).
+\]
+From the income process,
+\[
+w'-w=(\phi-1)w+(1-\phi)\bar w+\epsilon',
+\]
+and from the cash-in-hands law of motion (from part (d)),
+\[
+x'-x=\frac{\phi(1-\phi)}{R-\phi}\,w+(1-\phi)\bar w-RB+\epsilon'+\eta'
+\]
+Therefore,
+\begin{align*}
+c(x',w') - c(x,w)
+&= A\left(\frac{\phi(1-\phi)}{R-\phi}\,w+(1-\phi)\bar w-RB+\epsilon'+\eta'\right)
++ D \left( (\phi-1)w + (1-\phi)\bar w + \epsilon'\right) \\
+&= \text{predictable component in }w + (A+D)\epsilon' + A\eta'.
+\end{align*}
+
+We know that:
+\[
+A+D=\frac{R-1}{R}+\frac{\phi(R-1)}{R(R-\phi)}=\frac{R-1}{R-\phi}>A=\frac{R-1}{R},
+\]
+
+Thus consumption responds more to unexpected persistent shocks than to unexpected transitory shocks. Intuitively, a persistent shock $\epsilon$ affects income not only in the current period but also in future periods (via $w_{t+1}$), so it has a larger impact on consumption than a transitory shock $\eta$ that only affects current income.
+
+When $\phi=0$, $w$ is i.i.d., then $\epsilon$ has same effect as $\eta$ on consumption.
+
+\subsection*{(f)}
+
+Same as in (c), we assume a representative agent model. In general equilibrium we have a constant gross interest rate $R$, determined by risk-free asset market clearing:
+\[
+a^{\text{supply}}_t = A(R),
+\]
+where $a^{\text{supply}}_t$ is asset supply from households and $A(R)$ is the net supply, depending only on $R$.
+
+Since $R$ is constant in a stationary equilibrium, $A(R)$ is time-invariant, hence
+\[
+\mathbb E[a_{t+1}-a_t]=A(R)-A(R)=0.
+\]
+
+In this model we have:
+\[
+a_t=x_t-c(x_t,w_t)=(1-A)x_t-Dw_t-B.
+\]
+Taking expectations and differencing,
+\[
+\mathbb E[a_{t+1}-a_t]=(1-A)\,\mathbb E[x_{t+1}-x_t]-D\,\mathbb E[w_{t+1}-w_t].
+\]
+In a stationary cross-section, $\mathbb E[w_{t+1}-w_t]=0$, hence asset-market clearing implies
+\[
+\mathbb E[x_{t+1}-x_t]=0.
+\]
+
+Using the cash-in-hands law of motion from part (d),
+\begin{align*}
+x_{t+1}-x_t&=\frac{\phi(1-\phi)}{R-\phi} w_t-RB+(1-\phi)\bar w+\epsilon_{t+1}+\eta_{t+1}, \\
+&=\frac{\phi(1-\phi)}{R-\phi}(w_t-\bar w)-RB+\left(\frac{\phi(1-\phi)}{R-\phi} + (1-\phi) \right) \bar w+\epsilon_{t+1}+\eta_{t+1}.
+\end{align*}
+and stationarity implies $\mathbb E[w_t-\bar w]=0$ and $\mathbb E[\epsilon_{t+1}]=\mathbb E[\eta_{t+1}]=0$, so
+\[
+0=\mathbb E[x_{t+1}-x_t]= -RB+ \left(\frac{\phi(1-\phi)}{R-\phi} + (1-\phi) \right) \bar w.
+\]
+Therefore the general equilibrium interest rate must satisfy
+\begin{align*}
+RB&=\left(\frac{\phi(1-\phi)}{R-\phi} + (1-\phi) \right)\bar w = \frac{R(1-\phi)}{R-\phi} \bar w \\
+\Longrightarrow B&= \frac{(1-\phi)}{R-\phi} \bar w
+\end{align*}
+
+From part (d), the constant-term matching condition is
+\[
+0=\log(\beta R)-\gamma\Big((A+D)(1-\phi)\bar w-AR\,B\Big)
++\frac{\gamma^2}{2}\Big((A+D)^2\sigma_\epsilon^2+A^2\sigma_\eta^2\Big).
+\]
+
+From part (e), we have
+\[
+A=\frac{R-1}{R},
+\qquad
+A+D=\frac{R-1}{R-\phi},
+\qquad
+AR=R-1.
+\]
+Moreover, the GE no-drift condition implies
+\[
+B=\frac{1-\phi}{R-\phi}\,\bar w.
+\]
+Hence,
+\[
+(A+D)(1-\phi)\bar w
+=\frac{(R-1)(1-\phi)}{R-\phi}\bar w
+=AR\cdot \frac{1-\phi}{R-\phi}\bar w
+=AR\,B,
+\]
+so the mean term cancels:
+\[
+(A+D)(1-\phi)\bar w-AR\,B=0.
+\]
+Therefore the equilibrium interest rate condition simplifies to
+\[
+\boxed{\ \log(\beta R)
+=-\frac{\gamma^2}{2}\Big((A+D)^2\sigma_\epsilon^2+A^2\sigma_\eta^2\Big)\ }.
+\]
+
+Plugging in $A$ and $D$,
+\[
+\boxed{
+\log(\beta R)=-\frac{\gamma^2}{2}\Big(\frac{(R-1)^2}{(R-\phi)^2}\sigma_\epsilon^2+\frac{(R-1)^2}{R^2}\sigma_\eta^2\Big).
+}
+\]
+
+
+
+In the case (c) discussed in class, we have condition:
+\[
+\frac{\gamma(R-1)\sigma^2}{2R}+\frac{R}{\gamma(R-1)}\log(\beta R)=0
+\quad\Longleftrightarrow\quad
+\boxed{\ \log(\beta R)= -\frac{\gamma^2(R-1)^2}{2R^2}\sigma^2\ }.
+\]
+
+If we set $\phi=0$ and $\sigma_\epsilon^2=0$, then these two conditions coincide.
+
+
+Relative to the (c) case, the RHS of (f) now contains thwo terms:
+\begin{itemize}
+\item $(A+D)^2 \sigma^2_\epsilon $: precautionary saving from persistent risk $\epsilon$ pushes down the equilibrium interest rate.
+\item $A^2\sigma_\eta^2$: precautionatory saving from transitory risk $\eta$ also pushes down the equilibrium interest rate.
+\end{itemize}
+
+
+
+\section*{2. Aiyagari and changes in the wage}
+
+
+
+\subsection*{(a)}
+
+The Bellman equation is
+\[
+V(z,s;\omega)=\sup_{a'\ge 0}\left\{u(z-a')+\beta\,\mathbb E\!\left[V(z',s';\omega)\mid s\right]\right\},
+\qquad
+z'=Ra'+\omega\ell(s'),
+\]
+where $z$ is cash-in-hands and $u(c)=\frac{c^{1-\gamma}}{1-\gamma}$.
+
+\paragraph{Step 1: define the value of an arbitrary feasible plan.}
+Let $\pi=\{a'_t(\cdot)\}_{t\ge 0}$ be any feasible plan for the problem $(z,s;\omega)$ (so $a'_t\ge 0$ for all $t$), and let the induced paths satisfy
+\[
+c_t=z_t-a'_t,\qquad z_{t+1}=Ra'_t+\omega\ell(s_{t+1}).
+\]
+Define its lifetime utility as
+\[
+J(z,s;\omega;\pi)\equiv
+\mathbb E\Big[\sum_{t=0}^{\infty}\beta^t u(c_t)\,\Big|\,z_0=z,s_0=s\Big].
+\]
+Then by definition,
+\[
+V(z,s;\omega)=\sup_{\pi} J(z,s;\omega;\pi).
+\]
+
+\paragraph{Step 2: scale the plan.}
+Fix $\lambda>0$. Given any feasible plan $\pi$ at $(z,s;\omega)$, define the scaled plan
+$\tilde\pi$ at $(\lambda z,s;\lambda\omega)$ by
+\[
+\tilde a'_t \equiv \lambda a'_t \qquad \forall t.
+\]
+Because $a'_t\ge 0 \Rightarrow \tilde a'_t\ge 0$, the scaled plan $\tilde\pi$ is feasible at $(\lambda z,s;\lambda\omega)$.
+Moreover, the induced paths satisfy for all $t$,
+\[
+\tilde c_t=\lambda z_t-\tilde a'_t=\lambda(z_t-a'_t)=\lambda c_t,
+\qquad
+\tilde z_{t+1}=R\tilde a'_t+\lambda\omega\ell(s_{t+1})
+=\lambda(Ra'_t+\omega\ell(s_{t+1}))=\lambda z_{t+1}.
+\]
+
+\paragraph{Step 3: compare lifetime utilities.}
+By CRRA homogeneity, $u(\lambda c)=\lambda^{1-\gamma}u(c)$, hence
+\[
+J(\lambda z,s;\lambda\omega;\tilde\pi)
+=\mathbb E\Big[\sum_{t\ge 0}\beta^t u(\tilde c_t)\Big]
+=\mathbb E\Big[\sum_{t\ge 0}\beta^t u(\lambda c_t)\Big]
+=\lambda^{1-\gamma}\mathbb E\Big[\sum_{t\ge 0}\beta^t u(c_t)\Big]
+=\lambda^{1-\gamma}J(z,s;\omega;\pi).
+\]
+
+\paragraph{Step 4: take suprema}
+Taking the supremum over feasible plans yields
+\[
+V(\lambda z,s;\lambda\omega)
+=\sup_{\tilde\pi}J(\lambda z,s;\lambda\omega;\tilde\pi)
+=\sup_{\pi}\lambda^{1-\gamma}J(z,s;\omega;\pi)
+=\lambda^{1-\gamma}\sup_{\pi}J(z,s;\omega;\pi)
+=\lambda^{1-\gamma}V(z,s;\omega).
+\]
+
+\paragraph{Step 5: policy scaling.}
+Let $a(z\mid\omega,R)$ be an optimal policy at $(z,s;\omega)$. The scaled policy $\lambda a(z\mid\omega,R)$
+is feasible at $(\lambda z,s;\lambda\omega)$ and attains the scaled value, hence it is optimal there:
+\[
+\boxed{\,a(\lambda z\mid\lambda\omega,R)=\lambda\,a(z\mid\omega,R)\,}.
+\]
+Since $c(z\mid\omega,R)=z-a(z\mid\omega,R)$, we also have
+\[
+\boxed{\,c(\lambda z\mid\lambda\omega,R)=\lambda\,c(z\mid\omega,R)\,}.
+\]
+
+
+\subsection*{(b)}
+
+The equation characterizes a stationary distribution of cash-in-hands $z$.
+Given $(\omega,R)$ and the optimal saving policy $a(\cdot\mid\omega,R)$, next period cash-in-hands is
+\[
+z' = R\,a(\tilde z\mid\omega,R)+w\ell(s'),
+\]
+where $s\in S$ is the income (labor) shock with probability $\pi(s)$.  
+
+The left-hand side $F(z\mid\omega,R)$ is the stationary CDF of cash-in-hands: the probability that (current) cash-in-hands is less than or equal to $z$. In a stationary distribution, this is also the CDF of next period cash-in-hands $z'$.
+
+The right-hand side computes the CDF of $z'$ at $z$ by:
+\begin{itemize}
+\item drawing last period cash-in-hands $\tilde z$ from $F(\cdot\mid\omega,R)$,
+\item applying the policy $a(\tilde z\mid\omega,R)$ and forming $z'=R\,a(\tilde z\mid\omega,R)+w\ell(s)$; the indicator $\mathbf 1\{z'\le z\}$ equals $1$ if the inequality holds and $0$ otherwise,
+\item averaging over shocks $s$.
+\end{itemize}
+Thus the condition
+\[
+F(z\mid\omega,R)=\sum_{s\in S}\pi(s)\int \mathbf{1}\{R\,a(\tilde z\mid\omega,R)+w\ell(s)\le z\}\,dF(\tilde z\mid\omega,R)
+\]
+means that the distribution reproduces itself under the induced Markov transition for $z$:
+\[
+F = T_{\omega,R}(F).
+\]
+
+
+
+\subsection*{(c)}
+
+From (b) we know stationary CDF $F(\cdot\mid \omega,R)$ satisfying
+\[
+F(z\mid\omega,R)=\sum_{s\in S}\pi(s)\int 
+\mathbf{1}\{R\,a(\tilde z\mid\omega,R)+\omega\ell(s)\le z\}\,dF(\tilde z\mid\omega,R).
+\]
+Let the wage increase to $\lambda\omega$ with $\lambda>0$, and denote the new stationary CDF by $F(\cdot\mid \lambda\omega,R)$. 
+
+From part (a), we have
+\[
+a(\lambda \tilde z\mid \lambda\omega,R)=\lambda\,a(\tilde z\mid \omega,R).
+\]
+
+\paragraph{Step 1: show $F(\lambda z\mid \lambda\omega,R)=F(z\mid \omega,R)$.}
+
+Let $F(\cdot\mid \omega,R)$ be a stationary CDF for wage $\omega$. Define the candidate CDF under wage
+$\lambda\omega$ by
+\[
+\tilde F(z)\equiv F\!\left(\frac{z}{\lambda}\,\middle|\,\omega,R\right).
+\]
+Equivalently, if $Z_0\sim F(\cdot\mid \omega,R)$ then $\tilde Z\equiv \lambda Z_0$ has CDF $\tilde F$.
+
+Let $T_{\omega}$ denote the law-of-motion operator on CDFs:
+\[
+(T_{\omega}G)(z)\equiv \sum_{s\in S}\pi(s)\int 
+\mathbf 1\{R\,a(\tilde z\mid \omega,R)+\omega\ell(s)\le z\}\,dG(\tilde z).
+\]
+Stationarity of $F(\cdot\mid \omega,R)$ means $F=T_{\omega}F$.
+
+Now evaluate $(T_{\lambda\omega}\tilde F)(z)$:
+\begin{align*}
+(T_{\lambda\omega}\tilde F)(z)
+&=\sum_{s\in S}\pi(s)\int 
+\mathbf 1\{R\,a(\tilde z\mid \lambda\omega,R)+\lambda\omega\ell(s)\le z\}\,d\tilde F(\tilde z)\\
+&=\sum_{s\in S}\pi(s)\int 
+\mathbf 1\{R\,a(\lambda z_0\mid \lambda\omega,R)+\lambda\omega\ell(s)\le z\}\,dF(z_0)
+\qquad (\tilde z=\lambda z_0,\ \tilde z\sim \tilde F)\\
+&=\sum_{s\in S}\pi(s)\int 
+\mathbf 1\{\lambda\big(R\,a(z_0\mid \omega,R)+\omega\ell(s)\big)\le z\}\,dF(z_0)
+\qquad\text{(by (a): $a(\lambda z_0\mid \lambda\omega,R)=\lambda a(z_0\mid \omega,R)$)}\\
+&=\sum_{s\in S}\pi(s)\int 
+\mathbf 1\{R\,a(z_0\mid \omega,R)+\omega\ell(s)\le z/\lambda\}\,dF(z_0)\\
+&=(T_{\omega}F)(z/\lambda)=F(z/\lambda\mid \omega,R)=\tilde F(z),
+\end{align*}
+where the penultimate equality uses stationarity $F=T_{\omega}F$. Hence $\tilde F$ is stationary under wage \footnote{
+Let $Z_0\sim F(\cdot\mid \omega,R)$ and define $\tilde Z\equiv \lambda Z_0$, so $\tilde Z\sim \tilde F(\cdot)$ where
+$\tilde F(z)=F(z/\lambda\mid \omega,R)$. For any measurable function $g$, we can write integrals as expectations:
+\[
+\int g(\tilde z)\,d\tilde F(\tilde z)=\mathbb E[g(\tilde Z)]
+=\mathbb E[g(\lambda Z_0)]=\int g(\lambda z_0)\,dF(z_0).
+\]
+Applying this with
+\[
+g(\tilde z)\equiv \mathbf 1\{R a(\tilde z\mid \lambda\omega,R)+\lambda\omega\ell(s)\le z\}
+\]
+yields
+\[
+\int \mathbf 1\{R a(\tilde z\mid \lambda\omega,R)+\lambda\omega\ell(s)\le z\}\,d\tilde F(\tilde z)
+=\int \mathbf 1\{R a(\lambda z_0\mid \lambda\omega,R)+\lambda\omega\ell(s)\le z\}\,dF(z_0).
+\]
+}
+
+$\lambda\omega$, and therefore
+\[
+F(z\mid \lambda\omega,R)=\tilde F(z)=F\!\left(\frac{z}{\lambda}\,\middle|\,\omega,R\right)
+\quad\Longrightarrow\quad
+\boxed{\,F(\lambda z\mid \lambda\omega,R)=F(z\mid \omega,R)\,}.
+\]
+
+
+\paragraph{Step 2: aggregate savings scale with $\lambda$.}
+Define aggregate (mean) savings in the stationary distribution by
+\[
+\bar a(\omega,R)\equiv \int a(z\mid\omega,R)\,dF(z\mid\omega,R).
+\]
+Then
+\begin{align*}
+\bar a(\lambda\omega,R)
+&=\int a(z\mid\lambda\omega,R)\,dF(z\mid\lambda\omega,R) \\
+&=\int a(\lambda \hat z\mid\lambda\omega,R)\,dF(\lambda \hat z\mid\lambda\omega,R)
+\qquad (z=\lambda\hat z)\\
+&=\int \lambda a(\hat z\mid\omega,R)\,dF(\hat z\mid\omega,R)
+\qquad \text{(by Step 1 and policy scaling)}\\
+&=\lambda\,\bar a(\omega,R).
+\end{align*}
+Therefore, with $R$ fixed, a wage increase by a factor $\lambda$ raises long-run aggregate savings by the same factor:
+\[
+\boxed{\ \bar a(\lambda\omega,R)=\lambda\,\bar a(\omega,R)\ }.
+\]
+
+\subsection*{(d)}
+
+My answer won't change. Parts (a)--(c) used that scaling preserves feasibility. 
+
+When $\phi=0$, $a'\ge 0$ implies $\lambda a'\ge 0$, so the scaled plan is feasible, then we can prove that policy function scale with $\lambda$, and the stationary distribution also scale with $\lambda$.
+
+If $\phi$ is instead the natural borrowing limit, the constraint is
+\[
+a' \ge - \left(\frac{w_{\min} l}{R-1} \right) 
+\]
+If $a'$ is feasible at $(\omega,R)$, i.e. $a'\ge - \left(\frac{w_{\min} l}{R-1} \right)$, scaling preserveS feasibility:
+\[
+\lambda a' \ \ge\ \lambda \cdot \left(- \frac{w_{\min} l}{R-1} \right) = - \left(\frac{\lambda w_{\min} l}{R-1} \right),
+\]
+Hence, the scaled plan is feasible at $(\lambda\omega,R)$, and we can still prove that policy function scale with $\lambda$, and the stationary distribution also scale with $\lambda$.
+
+\section*{3. A Ricardian equivalence in Aiyagari’s model}
+
+\subsection*{(a)}
+
+The household choose $a'$ to smooth consumption, because we do not have default choices in this model. 
+To avoid negative consumption in the future, $a'$ must be greater than or equal the present value of future net income, suppose the agent constantly receives the lowest endowment $y_{\min}$:
+\[
+a' \geq -\left\{ \sum_{t=0}^{\infty} \frac{y_{\min} - \tau}{(1+r)^t} \right\} = -\left(\frac{y_{\min} - \tau}{r} \right) = - \left(\frac{y_{\min}}{r} - D \right).
+\]
+
+Thus, the natural borrowing limit is
+\[
+\boxed{\,\phi=-\left(\frac{y_{\min}}{r} - D \right)\,}.
+\]
+
+
+
+\subsection*{(b)}
+
+Fix the gross interest rate $R=1+r$ and note that the government sets $\tau=rD=(R-1)D$
+
+The household Bellman equation with debt $D$ is
+\begin{align*}
+V^D(a,s)&=\max
+\left\{
+u\big(c\big)+\beta\,\mathbb E\!\left[V^D(a',s')\mid s\right]
+\right\},
+\qquad \text{s.t.} \\
+a'\,&\ge\, -\left(\frac{y_{\min}}{r}-D\right) \\
+c &= y(s)+Ra-\tau-a'.
+\end{align*}
+
+\paragraph{Shift the state.}
+Define shifted assets
+\[
+b\equiv a-D,\qquad b'\equiv a'-D
+\quad\Longleftrightarrow\quad
+a=b+D,\ a'=b'+D.
+\]
+Substitute into consumption:
+\begin{align*}
+c
+&=y(s)+R(b+D)-(R-1)D-(b'+D) \\
+&=y(s)+Rb-b'.
+\end{align*}
+Thus consumption is independent of $D$ in the $(b,b')$ variables. The borrowing constraint becomes
+\[
+b'=a'-D \ \ge\ -\frac{y_{\min}}{r},
+\]
+which is also independent of $D$.
+
+\paragraph{Bellman equation in shifted variables.}
+Define $\widetilde V(b,s)\equiv V^D(b+D,s)$. Then $\widetilde V$ satisfies
+\begin{align*}
+\widetilde V(b,s)&=\max
+\left\{
+u\big(c\big)+\beta\,\mathbb E\!\left[\widetilde V(b',s')\mid s\right]
+\right\}
+\qquad \text{s.t.} \\
+b'&\ge -\frac{y_{\min}}{r} \\
+c&=y(s)+Rb-b'.
+\end{align*}
+No matter what $D$ is, the Bellman equation is the same. Hence the optimal policy for $b$ and the consumption rule do not depend on $D$.
+
+\paragraph{One-for-one shift in assets.}
+Let $b^*(\cdot)$ denote the optimal saving policy in shifted units. Then
+\[
+a'^*(a,s;D)=b^*(a-D,s)+D,
+\]
+Suppose we increase $D$ to $D+\Delta D$. We know that $b^*(\cdot)$ does not change:
+\begin{align*}
+&b^*(a-D-\Delta D,s)=b^*(a-D,s) \\
+\quad\Longleftrightarrow\quad &b^*(a-D-\Delta D,s)+D+\Delta D=b^*(a-D,s)+D+\Delta D \\
+\quad\Longleftrightarrow\quad &a'^*(a,s;D+\Delta D)=a'^*(a,s;D)+\Delta D.
+\end{align*}
+Thus, if $D$ increases, $a'^*$ increases one to one.
+
+
+
+
+
+
+\subsection*{(c)} 
+
+From part (b), for any fixed $R$ we can define shifted assets $b\equiv a-D$ and obtain a conumer problem that is independent of $D$. 
+Hence the optimal policy for $b$ and the induced stationary distribution of $b$ are independent of $D$. 
+
+Denote this stationary distribution by $G_R$: 
+\[ 
+b \sim G_R \qquad \text{(does not depend on $D$, but depend on $R$).}
+\] 
+Since $a=b+D$, the stationary distribution of $a$ under debt level $D$ is just a translation of $G_R$: 
+\begin{align*} 
+      F_D(\hat a)=Pr(a \leq \hat a) = Pr(b \leq \hat a-D)=G_R(\hat a-D) 
+      \quad\Longleftrightarrow\quad 
+      F_D(a)=G_R(a-D). 
+\end{align*} 
+
+Therefore aggregate asset holdings satisfy 
+\[ 
+\int a\, dF_D(a)=\int (b+D)\, dG_R(b)=D+\int b\, dG_R(b). 
+\] 
+market clearing requires 
+\[ 
+\int a\, dF_D(a)=D 
+\] 
+Thus we have 
+\[ 
+\int b\, dG_R(b)=0 
+\] 
+Then we can solve for the equilibrium interest rate $R^*$ by plugging the optimal policy and stationary distribution into the asset market clearing condition. 
+
+Since $G_R$ depends on $R$ but not on $D$, the solution $R^*$ does not depend on $D$ either.
+Therefore increasing $D$ does not change the equilibrium price $R$ nor any real allocations (in $b$-units);
+it only shifts asset holdings one-for-one via $a=b+D$.
+
+\subsection*{(d)}
+
+Yes. The neutrality result relies on the fact that the government policy shifts:
+\begin{enumerate}
+\item the household budget through $\tau=rD$ and
+\item the natural borrowing limit through
+\end{enumerate}
+\[
+a' \ge -\Big(\frac{y_{\min}}{r}-D\Big).
+\]
+With this endogenous debt limit, defining $b\equiv a-D$ makes
+\[
+c+a' = y+Ra-\tau
+\quad\Longrightarrow\quad
+c+b' = y+Rb,
+\qquad
+a'\ge -\Big(\frac{y_{\min}}{r}-D\Big)
+\Longrightarrow
+b'\ge -\frac{y_{\min}}{r},
+\]
+so the feasible set and Bellman equation in $(b,b')$ are independent of $D$.
+
+If instead the borrowing constraint did \emph{not} move with $D$ (e.g.\ $a'\ge \underline a$ fixed),
+then after shifting $b=a-D$ we would get
+\[
+b' = a'-D \ge \underline a - D,
+\]
+so the constraint would depend on $D$ and the translated problem would no longer be invariant. In that case,
+increasing $D$ can change which agents are constrained and alter policies and aggregates, so Ricardian
+neutrality generally fails.
+
+\section*{4. Incomplete Markets and Unemployment. A Numerical Analysis}
+
+\subsection*{(a)}
+
+We know that $R=1.04$, the natural borrowing limit is 
+\[
+\phi=-\frac{w l_{\min}}{R-1}=-\frac{0.5}{0.04}=-12.5
+\]
+
+
+\end{document}
+
