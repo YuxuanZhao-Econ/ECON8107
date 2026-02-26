@@ -103,13 +103,17 @@ Then we know that $R$ need to satisfy the Euler inequality for the high-income h
 \[
 \boxed{\frac{1}{y_2+(1-R)\phi} \ \ge\ \beta R\sum_{j=1}^2 \pi_j \frac{1}{y_j+(1-R)\phi}}.
 \]
+We can rewrite the above inequality as:
+\begin{align*}
+\beta R \leq \frac{\frac{1}{y_2+(1-R)\phi}}{\sum_{j=1}^2 \pi_j \frac{1}{y_j+(1-R)\phi}}.
+\end{align*}
 
 Define
 \[
-F(R)\;:=\;\frac{1}{y_2+(1-R)\phi}-\beta R\sum_{j=1}^2\pi_j\frac{1}{y_j+(1-R)\phi}.
+H(R)\;:=\;\frac{\frac{1}{y_2+(1-R)\phi}}{\sum_{j=1}^2 \pi_j \frac{1}{y_j+(1-R)\phi}}.
 \]
 
-We know that there exist a finite $\bar R$ satisfying $F(\bar R)=0$.
+We know that there exist a finite $\bar R$ satisfying $H(\bar R)=\beta \bar R$.
 \footnote{
 We have $\bar R$ satisfies:
 \begin{align*}
@@ -130,28 +134,118 @@ Then $\bar R$ satisfies:
 \]
 We can obtain a finite solution $\bar R$ to the above equation.}
 
-We want to show that for any $R\in[0,\bar R]$, we have $F(R)\ge 0$.
+
+We want to show that for any $R\in[0,\bar R]$, we have $H(R)\ge \beta R$.
+
+Let
 \[
-F'(R)=\frac{\phi}{(y_2+\phi-\phi R)^2}
--\beta\Big(\frac{\pi_1}{y_1+\phi-\phi R}+\frac{\pi_2}{y_2+\phi-\phi R}\Big)
--\beta R\phi\Big(\frac{\pi_1}{(y_1+\phi-\phi R)^2}+\frac{\pi_2}{(y_2+\phi-\phi R)^2}\Big).
+a_j(R):=\frac{1}{y_j+(1-R)\phi},\qquad S(R):=\sum_{j=1}^2\pi_j a_j(R),
+\]
+so that $H(R)=\dfrac{a_2(R)}{S(R)}$. Note that
+\[
+a_j'(R)=\frac{d}{dR}\Big(\frac{1}{y_j+(1-R)\phi}\Big)
+=\frac{\phi}{\big(y_j+(1-R)\phi\big)^2}=\phi\,a_j(R)^2>0,
+\]
+and hence
+\[
+S'(R)=\sum_{j=1}^2 \pi_j a_j'(R)=\phi\sum_{j=1}^2 \pi_j a_j(R)^2.
+\]
+By the quotient rule,
+\begin{align*}
+H'(R)
+&=\frac{a_2'(R)S(R)-a_2(R)S'(R)}{S(R)^2}\\
+&=\frac{\phi a_2(R)^2 S(R)-\phi a_2(R)\sum_{j=1}^2\pi_j a_j(R)^2}{S(R)^2}\\
+&=\frac{\phi a_2(R)}{S(R)^2}\left(a_2(R)S(R)-\sum_{j=1}^2\pi_j a_j(R)^2\right)\\
+&=\frac{\phi a_2(R)}{S(R)^2}\sum_{j=1}^2\pi_j a_j(R)\big(a_2(R)-a_j(R)\big).
+\end{align*}
+Since $y_2>y_1$ implies $y_2+(1-R)\phi>y_1+(1-R)\phi$ and thus $a_2(R)<a_1(R)$, we have
+\[
+\sum_{j=1}^2\pi_j a_j(R)\big(a_2(R)-a_j(R)\big)
+=\pi_1 a_1(R)\big(a_2(R)-a_1(R)\big)+\pi_2 a_2(R)\big(a_2(R)-a_2(R)\big)<0,
+\]
+so $H'(R)<0$, i.e.\ $H(R)$ is strictly decreasing in $R$.
+
+Since $\beta R$ is strictly increasing in $R$ and $H(\bar R)=\beta \bar R$, it follows that for any
+$R\in[0,\bar R]$,
+\[
+H(R)\ge H(\bar R)=\beta \bar R \ge \beta R.
+\]
+Therefore, for any $R\in[0,\bar R]$ the tight-state Euler inequality holds, hence it holds for both states,
+and the borrowing constraint binds for everyone: $a'(s_i)=-\phi$ for $i=1,2$. Consequently,
+\[
+A(R)=\sum_{i=1}^2\pi_i a'(s_i)=\sum_{i=1}^2\pi_i(-\phi)=-\phi,\qquad \forall\,R\in[0,\bar R].
 \]
 
-Let $\bar R$ be the largest interest rate such that the tight-state Euler inequality holds (i.e.\ $F(R)\ge 0$):
+
+\subsection*{Part (d)}
+
+Suppose income is i.i.d., i.e.\ $\pi(s'|s)=\pi(s')$, with a finite support $S=\{s_1,\dots,s_N\}$ and
+associated endowments $y_1<y_2<\cdots<y_N$, where $y_k:=y(s_k)$ and $\pi_k:=\pi(s_k)$.
+Assume CRRA utility $u(c)=\frac{c^{1-\gamma}}{1-\gamma}$ with $\gamma>0$ (so $u'(c)=c^{-\gamma}$), and
+$\phi<\min_k y_k$.
+
+\paragraph{Candidate borrowing-limit allocation.}
+If the household chooses $a'=-\phi$, then in stationarity $a=-\phi$ and consumption in state $s_k$ is
 \[
-\bar R:=\sup\{R\ge 0:\ F(R)\ge 0\}.
+c_k(R)=y_k+R(-\phi)-(-\phi)=y_k-(R-1)\phi=y_k+(1-R)\phi,\qquad k=1,\dots,N,
 \]
-Then for any $R\in[0,\bar R]$, we have $F(R)\ge 0$, i.e.
+which is strictly positive on the relevant range.
+
+\paragraph{Euler inequality and the tight state.}
+With CRRA, $u'(c)=c^{-\gamma}$. Under i.i.d.\ income, the Euler condition at the borrowing limit is
 \[
-\frac{1}{c_2(R)}\ge \beta R\sum_{j=1}^2 \pi_j\frac{1}{c_j(R)}.
+c_k(R)^{-\gamma}\ \ge\ \beta R\sum_{m=1}^N \pi_m\,c_m(R)^{-\gamma},\qquad k=1,\dots,N.
 \]
-Because $1/c_1(R)>1/c_2(R)$, the Euler inequality holds for both $i=1,2$, so the borrowing constraint binds
-for everyone and $a'(s_i)=-\phi$. Therefore aggregate saving is constant on this interval:
+The right-hand side does not depend on the current state $k$. Since $y_N$ is the highest endowment,
+we have $c_N(R)>c_k(R)$ for all $k<N$, hence $c_N(R)^{-\gamma}<c_k(R)^{-\gamma}$. Therefore the
+tightest inequality is for the highest-income state $s_N$.
+
+Thus it suffices to require
 \[
-A(R)=\sum_{i=1}^2 \pi_i\,a'(s_i)=\sum_{i=1}^2 \pi_i(-\phi)=-\phi,\qquad \forall\,R\in[0,\bar R].
+\boxed{
+c_N(R)^{-\gamma}\ \ge\ \beta R\sum_{m=1}^N \pi_m\,c_m(R)^{-\gamma}.
+}
+\]
+Equivalently,
+\[
+\beta R \ \le\ \frac{c_N(R)^{-\gamma}}{\sum_{m=1}^N \pi_m\,c_m(R)^{-\gamma}},
+\qquad
+H(R):=\frac{\big(y_N+(1-R)\phi\big)^{-\gamma}}{\sum_{m=1}^N \pi_m\big(y_m+(1-R)\phi\big)^{-\gamma}}.
 \]
 
+\paragraph{Monotonicity of $H(R)$.}
+Let $b_m(R):=c_m(R)^{-\gamma}=\big(y_m+(1-R)\phi\big)^{-\gamma}$ and $B(R):=\sum_{m=1}^N \pi_m b_m(R)$,
+so $H(R)=b_N(R)/B(R)$. Since $c_m'(R)=-\phi$, we have
+\[
+b_m'(R)=\frac{d}{dR}\big(c_m(R)^{-\gamma}\big)
+=-\gamma c_m(R)^{-\gamma-1}\,c_m'(R)
+=\gamma\phi\,c_m(R)^{-\gamma-1}>0,
+\]
+and hence $B'(R)=\sum_{m=1}^N \pi_m b_m'(R)>0$. By the quotient rule,
+\[
+H'(R)=\frac{b_N'(R)B(R)-b_N(R)B'(R)}{B(R)^2}
+=\frac{1}{B(R)^2}\sum_{m=1}^N \pi_m\Big(b_N'(R)b_m(R)-b_N(R)b_m'(R)\Big).
+\]
+Now note that
+\begin{align*}
+b_N'(R)b_m(R)-b_N(R)b_m'(R)
+&=\gamma\phi\,c_N(R)^{-\gamma-1}c_m(R)^{-\gamma}
+-\gamma\phi\,c_N(R)^{-\gamma}c_m(R)^{-\gamma-1} \\
+&=\gamma\phi\,c_N(R)^{-\gamma-1}c_m(R)^{-\gamma-1}\big(c_m(R)-c_N(R)\big).
+\end{align*}
+For $m<N$, we have $c_m(R)<c_N(R)$, so each term is strictly negative; for $m=N$ it is zero. Therefore
+$H'(R)<0$, i.e.\ $H(R)$ is strictly decreasing in $R$.
 
+\paragraph{Conclusion: a lowest kink on $[0,\bar R]$.}
+Since $\beta R$ is strictly increasing in $R$ and $H(R)$ is strictly decreasing, there exists at most one
+$\bar R$ such that $H(\bar R)=\beta\bar R$; define $\bar R$ as that intersection (when it exists).
+Then for any $R\in[0,\bar R]$ we have $H(R)\ge \beta R$, so the tight-state Euler inequality holds, hence
+it holds in all states and the borrowing constraint binds for everyone: $a'(s_k)=-\phi$ for all $k$.
+Consequently, aggregate saving is constant on this interval:
+\[
+A(R)=\sum_{k=1}^N \pi_k\,a'(s_k)=\sum_{k=1}^N \pi_k(-\phi)=-\phi,
+\qquad \forall\,R\in[0,\bar R].
+\]
 
 
 
